@@ -58,6 +58,7 @@ contract ClimberVault is Initializable, OwnableUpgradeable, UUPSUpgradeable {
             revert InvalidWithdrawalAmount();
         }
 
+
         if (block.timestamp <= _lastWithdrawalTimestamp + WAITING_PERIOD) {
             revert InvalidWithdrawalTime();
         }
