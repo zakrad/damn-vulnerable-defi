@@ -37,6 +37,7 @@ contract WalletRegistry is IProxyCreationCallback, Ownable {
     error OwnerIsNotABeneficiary();
     error InvalidFallbackManager(address fallbackManager);
 
+
     constructor(
         address masterCopyAddress,
         address walletFactoryAddress,
